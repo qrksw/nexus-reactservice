@@ -1,0 +1,95 @@
+.Toolbar {
+  width: 100%;
+  /* background-color: #282c34; */
+  overflow: auto;
+  /* height: 80px; */
+  border-bottom: 1px solid lightgrey;
+  position: relative;
+}
+
+.Toolbar a {
+  cursor: pointer;
+  padding: 1% 20px;
+  color: #595959;
+  font-size: 120%;
+  font-weight: 1000;
+  text-decoration: none;
+}
+
+.Toolbar img {
+  cursor: pointer;
+  width: 8%;
+  padding: 0 1em;
+}
+
+.center-popout-container {
+  background-color: #14161a;
+  border: black;
+  width: 40%;
+  position: fixed;
+  right: 3%;
+  top: 60px;
+  z-index: 10;
+}
+
+.center-popout-container button {
+  width: 100%;
+  height: 50px;
+}
+
+.center-div {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.left-div {
+  display: flex;
+  align-items: center;
+  float: left;
+  width: 33%;
+}
+
+.right-div {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 50%;
+  left: 100%;
+  transform: translate(-100%, -50%);
+}
+
+.Toolbar svg {
+  cursor: pointer;
+  padding: 0 1em;
+}
+
+.Toolbar input {
+  border-radius: 5px;
+  font-size: 15px;
+  padding: 1em 1em;
+}
+
+.Toolbar select {
+  cursor: pointer;
+  border: none;
+  font-size: 15px;
+  max-width: 75%;
+  color: #595959;
+  font-weight: 1000;
+  text-decoration: none;
+  /* padding: 0 2em; */
+}
+
+.option {
+  cursor: pointer;
+  border: 1px solid black;
+  color: #595959;
+  font-size: 120%;
+  font-weight: 1000;
+  
+  text-decoration: none;
+}
