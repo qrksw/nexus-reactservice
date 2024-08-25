@@ -35,7 +35,10 @@ export default class UserLoginForm extends React.Component {
 
     render() {
         function loginHandler(username, password) {
+            //JWT 
             var loginJSON = {"username": username, "password": password}
+
+            //Error messages
             var noUsernameMessage = document.getElementById('no-username-message')
             var noPasswordMessage = document.getElementById('no-password-message')
             var failedLoginMessage = document.getElementById('failed-login-message')
@@ -59,7 +62,7 @@ export default class UserLoginForm extends React.Component {
                 return
             }
 
-            fetch('http://localhost:6001/api/v1/auth/authenticate', {
+            fetch('http://localhost:6001/auth/authenticate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -67,15 +70,22 @@ export default class UserLoginForm extends React.Component {
                 body: JSON.stringify(loginJSON)
                 }).then(response => response.json().then(
                     (data) => {
+                        console.log(data)
                         if(response.status === 401) {
-                            console.log(data)
                             failedLoginMessage.hidden = false
-                            // userNotEnabledMessage.hidden = false
+                            //error out
+                            return
                         }
-                        else {
-                            console.log(data)
-                            // window.location.href="/"
-                        }
+
+                        var requestSuccessDiv = document.getElementById('request-success-div')
+                            //Save the JWT token to the cookies
+                            document.cookie = "refresh_token=" + data.jwtToken
+
+                            //Navigate back, or go to homepage if coming from the registration page
+                            if(!document.referrer.endsWith('/register'))
+                                window.history.back()
+                            else
+                                window.location.href="/"
                     }
                 ))
         }

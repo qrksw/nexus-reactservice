@@ -4,7 +4,7 @@ import "./css/ResetPassword.css";
 export default class ResetPasswordSearchForm extends React.Component {
     async componentDidMount() {
         //Since we are using a button outside of the form to handle the login attempt
-        //let's listen to the username and password input fields for if the user
+        //let's listen to the password input field for if the user
         //presses the enter key, and if so we can simulate a button click
         var passwordInput = document.getElementById('password')
 
@@ -57,16 +57,20 @@ export default class ResetPasswordSearchForm extends React.Component {
                 return
             }
 
-            fetch('http://localhost:8080/api/v1/password-reset/confirm', {
+            fetch('http://localhost:6005/confirmToken?token=' + token, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(request)
-                }).then(response => response.text().then(
-                    function (text) {
+                }).then(response => response.json().then(
+                    (data) => {
+                        if(response.status === 401) {
+                            //TODO check for expired tokens or invalid tokens
+                            return
+                        }
                             var requestSuccessDiv = document.getElementById('request-success-div')
-                            document.getElementById('request-success-text-field').innerHTML = text
+                            document.getElementById('request-success-text-field').innerHTML = "Your password has been reset. Click <a href='/login'>here</a> to login"
                             document.getElementById('request-div').hidden = true
                             requestSuccessDiv.hidden = false
 

@@ -47,7 +47,7 @@ export default class UserRegisterForm extends React.Component {
             var usernameAlreadyTakenMessage = document.getElementById('username-already-taken-message')
             var emailAlreadyTakenMessage = document.getElementById('email-already-taken-message')
 
-            //Reset all the error messages when the user attempts to register up
+            //Reset all the error messages when the user attempts to register
             noUsernameMessage.hidden = true
             noEmailMessage.hidden = true
             noPasswordMessage.hidden = true
@@ -76,7 +76,7 @@ export default class UserRegisterForm extends React.Component {
             }
             
 
-            fetch('http://localhost:6001/api/v1/auth/register', {
+            fetch('http://localhost:6001/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -91,6 +91,7 @@ export default class UserRegisterForm extends React.Component {
                         }
 
                         if(response.status === 409) {
+                            //Custom error codes: 410 for username error, 401 for email error
                             data.errorCode === 410 ? usernameAlreadyTakenMessage.hidden = false : emailAlreadyTakenMessage.hidden = false
                             return
                         }
@@ -99,6 +100,7 @@ export default class UserRegisterForm extends React.Component {
                             //Save the JWT token to the cookies
                             document.cookie = "refresh_token=" + data.jwtToken
 
+                            //Show user a message that a verification email has been sent to their account
                             document.getElementById('request-success-text-field').innerHTML = "Thank you for signing up! An email has been sent to " + registerJSON.email + " with a " +
                                                                                               "confirmation link to activate your account. <a href='/login'>Click here</a> to return to the login page"
                             document.getElementById('register-div').hidden = true
@@ -114,7 +116,7 @@ export default class UserRegisterForm extends React.Component {
         return(
             <>
                 <div id="register-div" className="register-div">
-                    <h1 style={{color: "white"}}>Sign up</h1>
+                    <h1 style={{color: "white"}}>Create account</h1>
                     <div style={{height: "50px"}} >
                         <b id="username-already-taken-message" hidden="true" style={{color: "red"}}>Username already taken</b>
                         <b id="email-already-taken-message" hidden="true" style={{color: "red"}}>Email already taken</b>
