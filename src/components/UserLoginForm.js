@@ -70,7 +70,6 @@ export default class UserLoginForm extends React.Component {
                 body: JSON.stringify(loginJSON)
                 }).then(response => response.json().then(
                     (data) => {
-                        console.log(data)
                         if(response.status === 401) {
                             failedLoginMessage.hidden = false
                             //error out

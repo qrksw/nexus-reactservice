@@ -84,7 +84,6 @@ export default class UserRegisterForm extends React.Component {
                 body: JSON.stringify(registerJSON)
                 }).then(response => response.json().then(
                     (data) => {
-                        console.log(data)
                         if(response.status === 403) {
                             //error out
                             return

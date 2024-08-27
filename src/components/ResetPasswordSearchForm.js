@@ -35,8 +35,6 @@ export default class ResetPasswordSearchForm extends React.Component {
         function requestHandler(credentials) {
             var credentials = {"credentials": credentials}
 
-            console.log(credentials)
-
             //Error messages
             var noCredentialsMessage = document.getElementById('no-credentials-message')
 
@@ -57,7 +55,6 @@ export default class ResetPasswordSearchForm extends React.Component {
                 body: JSON.stringify(credentials)
                 }).then(response => response.json().then(
                     (data) => {
-                        console.log(data)
                         if(response.status === 404) {
                             noCredentialsMessage.hidden = false
                             return
