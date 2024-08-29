@@ -76,16 +76,16 @@ export default class ResetPasswordSearchForm extends React.Component {
             <div id="request-div" className="request-div">
                 <h1 style={{color: "white"}}>Reset password</h1>
                 <div id="no-credentials-message-div" style={{height: "100px"}} >
-                    <b id="no-credentials-message" hidden="true" style={{color: "red"}}>Sorry, we could not find your account</b>
+                    <b id="no-credentials-message" hidden={true} style={{color: "red"}}>Sorry, we could not find your account</b>
                 </div>
                 <form id="request-form" className="request-form">
-                    <label for="credentials">Username or email:</label><br />
+                    <label htmlFor="credentials">Username or email:</label><br />
                     <div style={{height: "20px"}} />
                     <input type="text" id="credentials" name="credentials" placeholder="Type your username or email"/><hr />
                 </form>
                 <button className="submit-button" id='submit-button' onClick={() => requestHandler(window.document.getElementById('credentials').value)}>SUBMIT</button>
             </div>
-            <div id="request-success-div" className="request-div" hidden="true">
+            <div id="request-success-div" className="request-div" hidden={true}>
                 <p id="request-success-text-field">Please check your email for a password reset link</p>
             </div>
             </>

@@ -93,17 +93,17 @@ export default class UserLoginForm extends React.Component {
             <div id="login-div" className="login-div">
                 <h1 style={{color: "white"}}>Login</h1>
                 <div style={{height: "50px"}} >
-                    <b id="failed-login-message" hidden="true" style={{color: "red"}}>Incorrect username or password</b>
-                    <b id="user-not-enabled-message" hidden="true" style={{color: "red"}}>You must verify your account</b>
-                    <b id="no-username-message" hidden="true" style={{color: "red"}}>You must enter a username</b>
-                    <b id="no-password-message" hidden="true" style={{color: "red"}}>You must enter a password</b>
+                    <b id="failed-login-message" hidden={true} style={{color: "red"}}>Incorrect username or password</b>
+                    <b id="user-not-enabled-message" hidden={true} style={{color: "red"}}>You must verify your account</b>
+                    <b id="no-username-message" hidden={true} style={{color: "red"}}>You must enter a username</b>
+                    <b id="no-password-message" hidden={true} style={{color: "red"}}>You must enter a password</b>
                 </div>
                 <form id="login-form" className="login-form">
-                    <label for="username">Username:</label><br />
+                    <label htmlFor="username">Username:</label><br />
                     <div style={{height: "20px"}} />
                     <input type="text" id="username" name="username" placeholder="Type your username"/><hr />
                     <div style={{height: "20px"}} />
-                    <label for="password">Password:</label><br />
+                    <label htmlFor="password">Password:</label><br />
                     <div style={{height: "20px"}} />
                     <input type="password" id="password" name="password" placeholder="Type your password"/><hr />
                     <div id="remember-me-div" className="remember-me-div">

@@ -56,7 +56,7 @@ function Toolbar() {
                 <input type="text" placeholder="Search" />
                 <IoMdSettings size={"2em"}/>
                 { (username === null) ? <RiLoginCircleLine size={"2em"} onClick={() => navigateToLoginPage()}/> : <a onClick={displayPopout}>{username}</a> }
-                <div id='center-popout-container' className="center-popout-container" hidden="true">
+                <div id='center-popout-container' className="center-popout-container" hidden={true}>
                     <button onClick={() => {navigateToUserProfile()}}>Profile</button>
                     <button>Settings</button>
                     <button onClick={() => {logout()}}>Logout</button>

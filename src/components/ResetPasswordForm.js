@@ -38,6 +38,8 @@ export default class ResetPasswordSearchForm extends React.Component {
 
             var nonMatchingPasswordMessage = document.getElementById('nonmatching-password-message')
             var noPasswordMessage = document.getElementById('no-password-message')
+            var tokenAlreadyConfirmedMessage = document.getElementById('token-already-confirmed')
+            var tokenNotFound = document.getElementById('token-not-found')
             var password = window.document.getElementById('password').value
             var confirmationPassword = window.document.getElementById('confirm-password').value
             var request = {"token": token, "password": password}
@@ -45,6 +47,9 @@ export default class ResetPasswordSearchForm extends React.Component {
             //Reset when user attempts login
             nonMatchingPasswordMessage.hidden = true
             noPasswordMessage.hidden = true
+            tokenAlreadyConfirmedMessage.hidden = true
+            tokenNotFound.hidden = true
+
 
             //If the user enters nothing, do nothing
             if(password === "") {
@@ -52,31 +57,35 @@ export default class ResetPasswordSearchForm extends React.Component {
                 return
             }
             //If the passwords do not match, show the error message
-            if(password != confirmationPassword) {
+            if(password !== confirmationPassword) {
                 nonMatchingPasswordMessage.hidden = false
                 return
             }
 
-            fetch('http://localhost:6005/confirmToken?token=' + token, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(request)
+            fetch('http://localhost:6005/email/confirmToken?token=' + token, {
+                method: 'GET',
                 }).then(response => response.json().then(
-                    (data) => {
-                        if(response.status === 401) {
-                            //TODO check for expired tokens or invalid tokens
+                    () => {
+                        if(response.status === 404) {
+                            //TODO token not found, token doesn't exist
+                            tokenNotFound.hidden = false
                             return
                         }
-                            var requestSuccessDiv = document.getElementById('request-success-div')
-                            document.getElementById('request-success-text-field').innerHTML = "Your password has been reset. Click <a href='/login'>here</a> to login"
-                            document.getElementById('request-div').hidden = true
-                            requestSuccessDiv.hidden = false
+                        if(response.status === 409) {
+                            tokenAlreadyConfirmedMessage.hidden = false
+                            return
+                        }
+                        
+                        // Call fetch to auth service for updating the user's password
+                        // fetch()
+                        var requestSuccessDiv = document.getElementById('request-success-div')
+                        document.getElementById('request-success-text-field').innerHTML = "Your password has been reset. Click <a href='/login'>here</a> to login"
+                        document.getElementById('request-div').hidden = true
+                        requestSuccessDiv.hidden = false
 
-                            //Move the request-success-div to the center of the screen once the width and height have been rendered
-                            requestSuccessDiv.style.marginTop = "-" + requestSuccessDiv.offsetHeight / 2 + "px"
-                            requestSuccessDiv.style.marginLeft = "-" + requestSuccessDiv.offsetWidth / 2 + "px"
+                        //Move the request-success-div to the center of the screen once the width and height have been rendered
+                        requestSuccessDiv.style.marginTop = "-" + requestSuccessDiv.offsetHeight / 2 + "px"
+                        requestSuccessDiv.style.marginLeft = "-" + requestSuccessDiv.offsetWidth / 2 + "px"
                     }
                 ))
         }
@@ -86,22 +95,24 @@ export default class ResetPasswordSearchForm extends React.Component {
             <div id="request-div" className="request-div">
                 <h1 style={{color: "white"}}>New password</h1>
                 <div id="nonmatching-password-message-div" style={{height: "100px"}} >
-                    <b id="nonmatching-password-message" hidden="true" style={{color: "red"}}>Your passwords do not match</b>
-                    <b id="no-password-message" hidden="true" style={{color: "red"}}>You must enter a password</b>
+                    <b id="nonmatching-password-message" hidden={true} style={{color: "red"}}>Your passwords do not match</b>
+                    <b id="no-password-message" hidden={true} style={{color: "red"}}>You must enter a password</b>
+                    <b id="token-already-confirmed" hidden={true} style={{color: "red"}}>This token has already been confirmed</b>
+                    <b id="token-not-found" hidden={true} style={{color: "red"}}>Token not found</b>
                 </div>
                 <form id="request-form" className="request-form">
-                    <label for="password">New password:</label><br />
+                    <label htmlFor="password">New password:</label><br />
                     <div style={{height: "20px"}} />
                     <input type="password" id="password" name="password" placeholder="Type your password"/><hr />
                     <div style={{height: "20px"}} />
 
-                    <label for="confirm-password">Confirm password:</label><br />
+                    <label htmlFor="confirm-password">Confirm password:</label><br />
                     <div style={{height: "20px"}} />
                     <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password"/><hr />
                 </form>
                 <button className="submit-button" id='submit-button' onClick={() => requestHandler()}>SUBMIT</button>
             </div>
-            <div id="request-success-div" className="request-div" hidden="true">
+            <div id="request-success-div" className="request-div" hidden={true}>
                 <p id="request-success-text-field"></p>
             </div>
             </>
