@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/UserRegisterForm.css";
+import "./css/ConfirmEmailMessage.css";
 
 export default class ConfirmEmailMessage extends React.Component {
     async componentDidMount() {
@@ -12,7 +12,7 @@ export default class ConfirmEmailMessage extends React.Component {
                     var messageDiv = document.getElementById('message-div')
 
                     //Show user a message that a verification email has been sent to their account
-                    document.getElementById('request-success-text-field').innerHTML = data.message
+                    document.getElementById('message-text-field').innerHTML = data.message
 
                     //Move the message-div to the center of the screen once the width and height have been rendered
                     messageDiv.style.marginTop = "-" + messageDiv.offsetHeight / 2 + "px"
@@ -24,8 +24,8 @@ export default class ConfirmEmailMessage extends React.Component {
     render() {
         return(
             <>
-                <div id="message-div" className="request-div">
-                    <p id="request-success-text-field"></p>
+                <div id="message-div" className="message-div">
+                    <p id="message-text-field"></p>
                 </div>
             </>
         )
