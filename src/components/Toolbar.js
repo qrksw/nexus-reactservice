@@ -53,9 +53,9 @@ function Toolbar() {
                 <a href="/reports">Reports</a>
             </div>
             <div className="right-div">
-                <input type="text" placeholder="Search" />
+                <input type="text" id="searchBar" placeholder="Search" />
                 <IoMdSettings size={"2em"}/>
-                { (username === null) ? <RiLoginCircleLine size={"2em"} onClick={() => navigateToLoginPage()}/> : <a onClick={displayPopout}>{username}</a> }
+                { (username === null) ? <RiLoginCircleLine id="loginButton" size={"2em"} onClick={() => navigateToLoginPage()}/> : <a id="userButton" onClick={displayPopout}>{username}</a> }
                 <div id='center-popout-container' className="center-popout-container" hidden={true}>
                     <button onClick={() => {navigateToUserProfile()}}>Profile</button>
                     <button>Settings</button>
