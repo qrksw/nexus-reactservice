@@ -117,30 +117,30 @@ export default class UserRegisterForm extends React.Component {
                 <div id="register-div" className="register-div">
                     <h1 style={{color: "white"}}>Create account</h1>
                     <div style={{height: "50px"}} >
-                        <b id="username-already-taken-message" hidden="true" style={{color: "red"}}>Username already taken</b>
-                        <b id="email-already-taken-message" hidden="true" style={{color: "red"}}>Email already taken</b>
-                        <b id="no-username-message" hidden="true" style={{color: "red"}}>You must enter a username</b>
-                        <b id="no-email-message" hidden="true" style={{color: "red"}}>You must enter an email</b>
-                        <b id="no-password-message" hidden="true" style={{color: "red"}}>You must enter a password</b>
-                        <b id="nonmatching-password-message" hidden="true" style={{color: "red"}}>Your passwords do not match</b>
+                        <b id="username-already-taken-message" hidden={true} style={{color: "red"}}>Username already taken</b>
+                        <b id="email-already-taken-message" hidden={true} style={{color: "red"}}>Email already taken</b>
+                        <b id="no-username-message" hidden={true} style={{color: "red"}}>You must enter a username</b>
+                        <b id="no-email-message" hidden={true} style={{color: "red"}}>You must enter an email</b>
+                        <b id="no-password-message" hidden={true} style={{color: "red"}}>You must enter a password</b>
+                        <b id="nonmatching-password-message" hidden={true} style={{color: "red"}}>Your passwords do not match</b>
                     </div>
                     <form id="register-form" className="register-form">
-                        <label for="username">Username:</label><br />
+                        <label htmlFor="username">Username:</label><br />
                         <div style={{height: "20px"}} />
                         <input type="text" id="username" name="username" placeholder="Type your username"/><hr />
                         <div style={{height: "20px"}} />
 
-                        <label for="email">Email:</label><br />
+                        <label htmlFor="email">Email:</label><br />
                         <div style={{height: "20px"}} />
                         <input type="text" id="email" name="email" placeholder="Type your email"/><hr />
                         <div style={{height: "20px"}} />
 
-                        <label for="password">Password:</label><br />
+                        <label htmlFor="password">Password:</label><br />
                         <div style={{height: "20px"}} />
                         <input type="password" id="password" name="password" placeholder="Type your password"/><hr />
                         <div style={{height: "20px"}} />
 
-                        <label for="confirm-password">Confirm password:</label><br />
+                        <label htmlFor="confirm-password">Confirm password:</label><br />
                         <div style={{height: "20px"}} />
                         <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password"/><hr />
                     </form>
@@ -148,7 +148,7 @@ export default class UserRegisterForm extends React.Component {
                     <button className="submit-button" id='submit-button' onClick={() => registrationHandler(window.document.getElementById('username').value, window.document.getElementById('password').value, window.document.getElementById('email').value, window.document.getElementById('confirm-password').value)}>SIGN UP</button>
                     <div style={{height: "100px"}} />
                 </div>
-                <div id="request-success-div" className="request-div" hidden="true">
+                <div id="request-success-div" className="request-div" hidden={true}>
                     <p id="request-success-text-field"></p>
                 </div>
             </>

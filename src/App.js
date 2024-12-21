@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import UserProfile from './pages/UserProfile';
 import ResetPassword from './pages/ResetPassword';
 import ResetPasswordSearch from './pages/ResetPasswordSearch';
+import ConfirmEmail from './pages/ConfirmEmail';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
             <Route path="/password-reset" Component={ResetPasswordSearch}/>
             <Route path="/new-password" Component={ResetPassword}/>
             <Route path="/user/:id" Component={UserProfile} />
+            <Route path='/confirm-email' Component={ConfirmEmail}/>
           </Routes>
         </BrowserRouter>
   );
