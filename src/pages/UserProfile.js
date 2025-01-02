@@ -1,5 +1,6 @@
+// Integration file: Auth
+
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import Toolbar from './../components/Toolbar';
 
 function UserProfile() {

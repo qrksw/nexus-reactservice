@@ -1,3 +1,5 @@
+// Integration file: Auth
+
 import React from "react";
 import "./css/UserRegisterForm.css";
 

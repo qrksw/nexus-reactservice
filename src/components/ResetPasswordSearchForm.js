@@ -1,3 +1,6 @@
+// Integration file: Email
+// Integration file: Auth
+
 import React from "react";
 import "./css/ResetPassword.css";
 
