@@ -5,36 +5,26 @@ function Home() {
     //state variables for managing status of log in an project content
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [projects, setProjects] = useState([]);
+    const [userScenario, setUserScenario] = useState('noLoggedIn');
 
     useEffect(() => {
-        // Extract JWT token from cookies
-        const jwtToken = document.cookie.split("; ").find((row) => row.startsWith("refresh_token="))?.split("=")[1];
-        if (jwtToken) {//when true, set the user to logged in and get projects.
-            setIsLoggedIn(true);
-            fetchProjects(jwtToken);
+        switch (userScenario) {
+            case 'loggedInWithProjects':
+                setIsLoggedIn(true);
+                setProjects([{id: 1, name: 'Project 1' },
+                             {id: 2, name: 'Project 2'}]);
+                break;
+            case 'loggedInWithoutProjects':
+                setIsLoggedIn(true);
+                setProjects([]);
+                break;
+            default:
+                setIsLoggedIn(false);
+                setProjects([]);
+                break;
         }
-    }, []);
-    //Fetch projects for the logged-in user
-    const fetchProjects = async (token) => {
-        try {
-            //Make GET request to fetch projects
-            const response = await fetch('http://localhost:6001/projects', {
-                headers: {
-                    'Authorization': "Bearer " + token,
-                    'Content-Type': 'application/json'
-                }
-            });
-            const data = await response.json();
-            if (response.ok) {
-            //If successful, update the projects state
-                setProjects(data.projects);
-            } else {
-                console.error('Failed to fetch projects:', data);
-            }
-        } catch (error) {
-            console.error('Error fetching projects:', error);
-        }
-    };
+    }, [userScenario]);
+
     //Function to handle project creation, can redirect or open a modal
     const createNewProject = () => {
     //placeholder for project creation logic
@@ -46,6 +36,32 @@ function Home() {
             <Toolbar /> {/* Render the Toolbar component */}
             <div id="spacer-div" style={{ height: "50px" }}></div>
             <div className="container">
+                <div className="user-scenario-option">
+                    <label>
+                        <input
+                            type="radio"
+                            checked={userScenario === 'notLoggedIn'}
+                            onChange={() => setUserScenario('notLoggedIn')}
+                        />
+                        Not Logged In
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            checked={userScenario === 'loggedInWithProjects'}
+                            onChange={() => setUserScenario('loggedInWithProjects')}
+                        />
+                        Logged In with Projects
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            checked={userScenario === 'loggedInWithoutProjects'}
+                            onChange={() => setUserScenario('loggedInWithoutProjects')}
+                        />
+                        Logged In without Projects
+                    </label>
+                </div>
                 {!isLoggedIn ? (
                     <div className="homepage-message">
                         <h1>Welcome!</h1>
